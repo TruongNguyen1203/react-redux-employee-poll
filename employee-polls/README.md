@@ -1,6 +1,7 @@
 # Employee Polls Project
 
 To get started developing right away:
+- cd `/employee-polls`
 - install all project dependencies with `npm install`
 - start the development server with `npm start`
 
