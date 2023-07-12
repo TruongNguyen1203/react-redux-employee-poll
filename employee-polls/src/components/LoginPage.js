@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import {useState} from 'react'
-import {setAuthedUser} from '../actions/authUser'
+import { useState } from "react";
+import { setAuthedUser } from "../actions/authUser";
 const LoginPage = (props) => {
   const navigate = useNavigate();
   const [choosedUserId, setChooseUserId] = useState("");
@@ -13,7 +13,14 @@ const LoginPage = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
     props.dispatch(setAuthedUser(props.users[choosedUserId]));
-    navigate("/");
+
+    const previousSearch = localStorage.getItem("previousSearch");
+
+    if (previousSearch) {
+      navigate(previousSearch);
+    } else {
+      navigate("/");
+    }
   };
   return (
     <div className="login">
@@ -25,12 +32,16 @@ const LoginPage = (props) => {
         <select onChange={(e) => onChangeUser(e)} data-testid="user-select">
           <option value="">Choose an User</option>
           {Object.keys(props.users).map((userId) => (
-            <option key={userId} value={userId}>{props.users[userId].name}</option>
+            <option key={userId} value={userId}>
+              {props.users[userId].name}
+            </option>
           ))}
         </select>
       )}
 
-      <button onClick={(e) => handleLogin(e)} data-testid="login-button">Submit</button>
+      <button onClick={(e) => handleLogin(e)} data-testid="login-button">
+        Submit
+      </button>
     </div>
   );
 };

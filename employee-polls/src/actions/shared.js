@@ -1,14 +1,17 @@
-import { _getUsers, _saveQuestionAnswer } from "../utils/_DATA";
+import { _saveQuestionAnswer } from "../utils/_DATA";
 import {
   receiveUsers,
   saveQuestionAnswerUser,
   saveQuestionUser,
 } from "./users";
-import { receiveQuestions, saveQuestionAnswerQuestion, saveQuestion } from "./questions";
+import {
+  receiveQuestions,
+  saveQuestionAnswerQuestion,
+  saveQuestion,
+} from "./questions";
 import { getInitialData } from "../utils/api";
 import { saveQuestionAnswerAuthedUser } from "./authUser";
 import { _saveQuestion } from "../utils/_DATA";
-
 
 export const handleInitData = () => {
   return (dispatch) => {

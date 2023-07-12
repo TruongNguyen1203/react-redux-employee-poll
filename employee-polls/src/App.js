@@ -15,12 +15,12 @@ import LeaderBoardPage from "./components/LeaderBoardPage";
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitData());
-  }, []);
+  }, [props]);
   return (
     <div className="app">
       {Object.keys(props.authUser).length !== 0 && <Nav />}
       <Routes>
-        <Route path="login" element={<LoginPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
         <Route
           path="/"
           exact
@@ -56,15 +56,7 @@ const App = (props) => {
             </RequiredAuth>
           }
         ></Route>
-        <Route
-          path="/404"
-          exact
-          element={
-            <RequiredAuth>
-              <NotFoundPage />
-            </RequiredAuth>
-          }
-        ></Route>
+        <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
     </div>
   );

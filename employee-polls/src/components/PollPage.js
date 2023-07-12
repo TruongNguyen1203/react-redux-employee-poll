@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleSaveQuestionAnswer } from "../actions/shared";
 
@@ -13,15 +13,13 @@ const withRouter = (Component) => {
   return ComponentWithRouterProp;
 };
 const PollPage = (props) => {
-  if (props.question === null) {
-    props.navigate("/404");
+  if (!props.question) {
+    return <Navigate to="/404" replace={true} />;
   }
   const handleSubmitAnswer = (answer) => {
     const authedUser = props.authUser.id;
-    const qid = props.question.id
-    props.dispatch(
-      handleSaveQuestionAnswer(authedUser, qid, answer)
-    );
+    const qid = props.question.id;
+    props.dispatch(handleSaveQuestionAnswer(authedUser, qid, answer));
   };
 
   return (
@@ -79,9 +77,13 @@ const PollPage = (props) => {
 const mapStateToProps = ({ questions, authUser, users }, props) => {
   const { questionId } = props.router.params;
   if (!questionId) {
-    return;
+    return {};
   }
   const question = questions[questionId];
+
+  if (!question) {
+    return {};
+  }
   const author = users[question.author];
   const isAnswer = Object.keys(authUser.answers).includes(questionId);
   var answer = "";

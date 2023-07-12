@@ -15,7 +15,7 @@ const LeaderBoardPage = ({ usersByDes }) => {
             <tr key={user.id}>
               <td>
                 <div className="user-info">
-                  <img src={user.avatarURL}></img>
+                  <img src={user.avatarURL} alt="avatar"></img>
                   <div>
                     <p className="name">{user.name}</p>
                     <p className="id">{user.id}</p>
